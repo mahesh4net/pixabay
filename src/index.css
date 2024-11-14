@@ -1,13 +1,451 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+
+
+*{
+  box-sizing: border-box;
+  font-family: Hind;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+body{
+  background-color: rgb(36, 35, 40);
+}
+
+.nav-container-outer{
+  width: 100%;
+}
+
+
+.nav-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  background-color: rgb(238, 237, 239);
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.nav-container img {
+  width: 4rem;
+  height: auto;
+ 
+ 
+}
+
+.nav-container img:hover{
+  cursor: pointer;
+}
+
+.menu-links{
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navlink{
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.navlink:hover{
+   color: rgb(37, 36, 36);
+
+}
+
+.navlink.active{
+  
+  text-decoration: none;
+  position: relative;
+}
+
+.navlink.active::after{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 0.1rem;
+  bottom: 0;
+  background-color: rgb(0, 0, 0);
+  left: 0;
+  right: 0;
+
+
+}
+
+
+.homepage-container{
+ 
+ 
+}
+
+.home-title{
+ text-align: center;
+  padding-block: 4rem;
+  background-image: url('assets/home-background.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  
+}
+
+.explore-section{
+  padding-inline: 10%;
+  width: 100%;
+  min-height: 60vh;
+  padding-block: 3rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.image-container{
+  width: calc(25% - 1.6rem);
+  aspect-ratio: 16/9;
+  box-shadow: 0 0 10px black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.image-container img{
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.image-container:hover {
+
+cursor: pointer;
+transform: scale(1.1);
+}
+
+
+.navigation{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.navigation .prev{
+  color: white;
+  background-color: red;
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+
+}
+
+
+.navigation .prev:hover{
+  cursor: pointer;
+}
+.navigation .prev:disabled{
+cursor: not-allowed;
+background-color: rgb(88, 5, 5);
+}
+.navigation .next{
+  color: white;
+  background-color: rgb(0, 255, 0);
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.navigation .next:hover{
+  cursor: pointer;
+}
+
+.navigation .next:disabled{
+cursor: not-allowed;
+background-color: rgb(4, 75, 4);
+}
+.navigation h4{
+  color: white;
+
+}
+
+.skeleton-box {
+  width: 100%; /* Set the width according to your layout */
+  height: 100%; /* Set height for your placeholder */
+ 
+  position: relative;
+  overflow: hidden;
+  
+}
+
+
+/* Shimmer effect */
+.skeleton-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+ 
+  background: linear-gradient(
+    to right,
+
+    rgba(30, 36, 36, 0.2) 5%,
+    rgba(40, 52, 52, 0.2) 10%,
+    rgba(50, 56, 56, 0.2) 15%,
+    rgba(60, 64, 64, 0.2) 20%,
+    rgba(78, 77, 77, 0.4) 40%,
+    rgba(92, 92, 92, 0.6) 60%,
+    rgba(70, 59, 59, 0.2) 80%,
+    rgba(60, 39, 39, 0.2) 85%,
+    rgba(50, 42, 42, 0.2) 90%,
+    rgba(40, 37, 37, 0.2) 95%,
+    rgba(41, 41, 41, 0.2) 100%
+  );
+  animation: shimmer 1s infinite;
+}
+
+/* Keyframes for shimmer animation */
+@keyframes shimmer {
+  0% {
+    left: 0;
+    right: 100%;
+  }
+  100% {
+   right: 0;
+   left: 100%;
+  }
+}
+
+.download-container{
+  margin-top: 3rem;
+  display: flex;
+ flex-direction: column;
+ gap: 1rem;
+ align-items: center;
+ width: 100%;
+}
+
+.download-container img{
+ width: 50%;
+ height: auto;
+}
+
+
+.download-details{
+  max-width: 50%;
+  min-width: 50%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+margin-bottom: 2rem;
+}
+
+.img-stats{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.views, .likes, .downloads{
+  padding: 0.5rem 1rem;
+  background-color: rgb(3, 109, 231);
+  color: white;
+  border-radius: 0.5rem;
+ display: flex;
+ gap: 0.5rem;
+ justify-content: center;
+ align-items: center;
+}
+
+.download-container h5{
+   font-weight: 400;
+   font-size: 1.2rem;
+}
+.download-btn{
+  
+    padding: 0.5rem 2rem;
+
+  border-radius: 0.5rem;
+  background-color: rgb(6, 201, 6);
+  font-size: 1.3rem;
+
+  
+}
+
+.download-btn:hover{
+  background-color: green;
+  cursor: pointer;
+ 
+}
+
+
+
+.search-container{
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-container input {
+  width: 30%;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: black;
+  font-size: 1.2rem;
+  border: 3px solid transparent;
+  outline: none;
+}
+
+
+.search-container button{
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: green;
+
+}
+
+.search-container button:hover{
+  cursor: pointer;
+}
+
+
+.search-container input:focus{
+  outline: none;
+  border: 3px solid rgb(0, 0, 0);
+  background-color: rgb(252, 238, 238);
+}
+
+
+
+
+.footer-container{
+  background-color: black;
+  color: white;
+  padding-block: 1.5rem;
+  display: flex;
+  
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+
+
+.footerlogo{
+  display: flex;
+  
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerlogo img{
+  width: 2.5rem;
+  height: auto;
+}
+
+@media (max-width: 1025px){
+
+
+  .explore-section{
+    padding-inline: 5%;
+    gap: 1rem;
+  }
+
+  .image-container{
+    width: calc(33.3% - 0.7rem);
+  }
+}
+
+@media (max-width: 1025px){
+
+.search-container{
+  padding-inline: 5%;
+}
+  .search-container input{
+    width: 100%;
+  }
+
+  
+}
+
+@media (max-width: 690px){
+
+  .explore-section{
+    padding-inline: 1rem;
+  }
+
+  .image-container{
+    width: calc(50% - 0.5rem);
+  }
+
+  .search-container{
+  padding-inline: 1rem;
+}
+
+.footer-container{
+  flex-direction: column;
+  gap: 0.5rem;
+}
+}
+
+@media (max-width: 565px){
+
+:root{
+  font-size: 15px;
+}
+
+html{
+  font-size: 15px;
+}
+  .nav-container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+      gap: 1.5rem;
+  }
+
+  .menu-links{
+    gap: 1rem;
+  }
+
+  .navlink {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 340px){
+  .menu-links{
+    gap: 0.5rem;
+  }
+
+  .search-container{
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .search-container button {
+    width: 100%;
+  }
+
+  .image-container{
+    width: 100%;
+  }
 }
