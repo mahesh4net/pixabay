@@ -5,6 +5,7 @@ import { mycontext } from "../context/context";
 export default function Imagebox(props) {
   const {
     setViews,
+    setTags,
     setDownloads,
     setLikes,
     setImageSrc,
@@ -19,6 +20,7 @@ export default function Imagebox(props) {
     setDownloads(props.downloads)
     setLikes(props.likes)
     setImageSrc(props.source)
+    setTags(props.tags)
     navigate("/download");
   }
 

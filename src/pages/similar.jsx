@@ -1,47 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import Imagebox from "../components/imagebox";
 import Navigation from "../components/navigation";
 import Loading from "../components/loading";
+import { mycontext } from "../context/context";
 
 // Skeleton component to display while images are loading
 function Skeleton() {
   return <Loading />; // Add skeleton CSS for better styling
 }
 
-export default function Search() {
+export default function Similar() {
   const [imageData, setImageData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalpage, setTotalPage] = useState(1);
   const [currentpage, setCurrentPage] = useState(1);
-  const [searchval, setSearchVal] = useState("space");
-  const inputElement = useRef(null);
-  const [errormsg, seterrormsg] = useState(false);
- const isLoadingRef = useRef(true);
- useEffect(() => {
-   setIsLoading(true);
-   isLoadingRef.current = true;
-   // Set loading to true every time the page changes
-   seterrormsg(false);
-   setTimeout(() => {
-     if (isLoadingRef.current) {
-       seterrormsg(true);
-     }
-   }, 30000);
-   // Fetch data for the current page
-   fetch(
-     `https://pixabay.com/api/?key=46475365-dcc91c4f1d1938b3d11762699&q=${searchval}&per_page=52&page=${currentpage}`
-   )
-     .then((response) => response.json())
-     .then((data) => {
-       setTotalPage(Math.ceil(data.totalHits / 52));
-       setImageData(data.hits);
-       console.log(imageData);
-     })
-     .catch((error) => {
-       console.error("Error fetching data:", error);
-       seterrormsg(true);
-     });
- }, [currentpage, searchval]);
+    const [errormsg, seterrormsg] = useState(false);
+    const {tags} = useContext(mycontext)
+  const isLoadingRef = useRef(true);
+  useEffect(() => {
+    setIsLoading(true);
+    isLoadingRef.current = true;
+    // Set loading to true every time the page changes
+    seterrormsg(false);
+    setTimeout(() => {
+      if (isLoadingRef.current) {
+        seterrormsg(true);
+      }
+    }, 30000);
+    // Fetch data for the current page
+    fetch(`https://pixabay.com/api/?key=46475365-dcc91c4f1d1938b3d11762699&q=${tags}&per_page=52&page=${currentpage}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTotalPage(Math.ceil(data.totalHits / 52));
+        setImageData(data.hits);
+        console.log(imageData);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+        seterrormsg(true);
+      });
+  }, [currentpage]);
 
   // Wait for all images to load before removing the skeleton
   useEffect(() => {
@@ -68,21 +66,9 @@ export default function Search() {
     }
   }, [imageData]);
 
-  function handleSearch() {
-    setSearchVal(inputElement.current.value);
-  }
-
   return (
     <>
       <div className="homepage-container">
-        <div className="home-title">
-          <h1>Search</h1>
-        </div>
-
-        <div className="search-container">
-          <input type="text" placeholder="Search here like 'space'" ref={inputElement} />
-          <button onClick={handleSearch}>Search</button>
-        </div>
         <div className="explore-section">
           {!errormsg
             ? isLoading
@@ -105,11 +91,6 @@ export default function Search() {
           {errormsg ? (
             <div style={{ textAlign: "center" }}>
               <h2>Could not Load Images</h2> <p>check your internet connection !</p>
-            </div>
-          ) : null}
-          {imageData.length == 0 ? (
-            <div style={{ textAlign: "center" }}>
-              <h2>Image Not Found</h2> <p>try searching something different</p>{" "}
             </div>
           ) : null}
         </div>

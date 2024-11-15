@@ -12,6 +12,7 @@ import Errorpage from "./pages/errorpage";
 import Download from "./pages/download";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import Similar from "./pages/similar";
 
 
 
@@ -28,11 +29,13 @@ function App() {
         <Route path="/fashion" element={<Fashion />} />
         <Route path="/nature" element={<Nature />} />
         <Route path="/sports" element={<Sports />} />
-        <Route path="/search" element={<Search />}/>
-        <Route path="/download" element={<Download />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/download" element={<Download />}>
+          <Route path="/download/similar-images" element={<Similar />}></Route>
+        </Route>
         <Route path="*" element={<Errorpage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }

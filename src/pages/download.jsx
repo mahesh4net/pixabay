@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { mycontext } from "../context/context";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function Download() {
   const {
@@ -7,9 +8,10 @@ export default function Download() {
     downloads,
     likes,
     imagesrc,
+    tags
   } = useContext(mycontext);
 
-
+  console.log(tags)
 
     const handleDownload = async () => {
       try {
@@ -59,6 +61,12 @@ export default function Download() {
           <button className="download-btn" onClick={handleDownload}>
             Download
           </button>
+        </div>
+        <NavLink to="/download/similar-images" >
+          view similar images
+        </NavLink>
+        <div className="outlet-container">
+          <Outlet />
         </div>
       </div>
     </>

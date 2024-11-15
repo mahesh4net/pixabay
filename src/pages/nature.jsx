@@ -25,7 +25,7 @@ export default function Nature() {
       if (isLoadingRef.current) {
         seterrormsg(true);
       }
-    }, 10000);
+    }, 30000);
     // Fetch data for the current page
     fetch(
       `https://pixabay.com/api/?key=46475365-dcc91c4f1d1938b3d11762699&category=nature&per_page=52&page=${currentpage}`
