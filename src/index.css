@@ -364,6 +364,11 @@ margin-bottom: 2rem;
   height: auto;
 }
 
+
+.outlet-container{
+  min-width: 100%;
+}
+
 @media (max-width: 1025px){
 
 
@@ -392,12 +397,21 @@ margin-bottom: 2rem;
 @media (max-width: 690px){
 
   .explore-section{
-    padding-inline: 1rem;
+    padding-inline: 0.5rem;
+    gap: 0.5rem;
+    min-width: 100% !important;
   }
 
   .image-container{
-    width: calc(50% - 0.5rem);
+    border-radius: 0.2rem;
+    width: calc(50% - 0.26rem);
   }
+
+  .skeleton-box{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
 
   .search-container{
   padding-inline: 1rem;
