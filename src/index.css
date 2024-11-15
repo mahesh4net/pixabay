@@ -434,6 +434,20 @@ html{
   }
 }
 
+@media (max-width: 500px){
+  .download-container img{
+ width: 100%;
+ padding-inline: 1rem;
+}
+
+
+.download-details{
+  max-width: 100%;
+  width: 100%;
+padding-inline: 1rem;
+}
+}
+
 @media (max-width: 340px){
   .menu-links{
     gap: 0.5rem;
