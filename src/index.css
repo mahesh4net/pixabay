@@ -369,6 +369,12 @@ margin-bottom: 2rem;
   min-width: 100%;
 }
 
+.not-allowed{
+  text-align: center;
+  padding-block: 5rem;
+  min-height: 100vh;
+}
+
 @media (max-width: 1025px){
 
 

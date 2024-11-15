@@ -1,6 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { mycontext } from "../context/context";
 import { NavLink, Outlet } from "react-router-dom";
+
+
+ 
 
 export default function Download() {
   const {
@@ -10,6 +13,19 @@ export default function Download() {
     imagesrc,
     tags
   } = useContext(mycontext);
+
+  const [allowed, setallowed] = useState(true)
+
+  useEffect(() => {
+    
+ if (imagesrc == null) {
+   setallowed(false);
+ }
+
+ if (imagesrc != null) {
+   setallowed(true);
+ }
+  }, [])
 
   console.log(tags)
 
@@ -39,36 +55,40 @@ export default function Download() {
         <h1> Download Image</h1>
       </div>
 
-      <div className="download-container">
-        <img src={imagesrc} alt="" />
+      {allowed ? (
+        <div className="download-container">
+          <img src={imagesrc} alt="" />
 
-        <div className="download-details">
-          <div className="img-stats">
-            <div className="views">
-              <i class="fa-solid fa-eye"></i>
-              <h5>{views}</h5>
+          <div className="download-details">
+            <div className="img-stats">
+              <div className="views">
+                <i class="fa-solid fa-eye"></i>
+                <h5>{views}</h5>
+              </div>
+              <div className="likes">
+                <i class="fa-solid fa-thumbs-up"></i>
+                <h5>{likes}</h5>
+              </div>
+              <div className="downloads">
+                <i class="fa-solid fa-download"></i>
+                <h5>{downloads}</h5>
+              </div>
             </div>
-            <div className="likes">
-              <i class="fa-solid fa-thumbs-up"></i>
-              <h5>{likes}</h5>
-            </div>
-            <div className="downloads">
-              <i class="fa-solid fa-download"></i>
-              <h5>{downloads}</h5>
-            </div>
+
+            <button className="download-btn" onClick={handleDownload}>
+              Download
+            </button>
           </div>
-
-          <button className="download-btn" onClick={handleDownload}>
-            Download
-          </button>
+          <NavLink to="/download/similar-images">view similar images</NavLink>
+          <div className="outlet-container">
+            <Outlet />
+          </div>
         </div>
-        <NavLink to="/download/similar-images" >
-          view similar images
-        </NavLink>
-        <div className="outlet-container">
-          <Outlet />
+      ) : (
+        <div className="not-allowed">
+          <h2>direct navigation not allowed !</h2>
         </div>
-      </div>
+      )}
     </>
   );
 }
