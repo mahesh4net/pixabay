@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
 import Imagebox from "../components/imagebox";
 import Navigation from "../components/navigation";
 import Loading from "../components/loading";
@@ -13,10 +14,18 @@ export default function Nature() {
   const [isLoading, setIsLoading] = useState(true);
   const [totalpage, setTotalPage] = useState(1);
   const [currentpage, setCurrentPage] = useState(1);
-
+  const [errormsg, seterrormsg] = useState(false);
+  const isLoadingRef = useRef(true);
   useEffect(() => {
-    setIsLoading(true); // Set loading to true every time the page changes
-
+    setIsLoading(true);
+    isLoadingRef.current = true;
+    // Set loading to true every time the page changes
+    seterrormsg(false);
+    setTimeout(() => {
+      if (isLoadingRef.current) {
+        seterrormsg(true);
+      }
+    }, 10000);
     // Fetch data for the current page
     fetch(
       `https://pixabay.com/api/?key=46475365-dcc91c4f1d1938b3d11762699&category=nature&per_page=52&page=${currentpage}`
@@ -28,7 +37,8 @@ export default function Nature() {
         console.log(imageData);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.log("Error fetching data:", error);
+        seterrormsg(true);
       });
   }, [currentpage]);
 
@@ -50,7 +60,10 @@ export default function Nature() {
               img.onerror = resolve; // Handle error to prevent loading indefinitely
             })
         )
-      ).then(() => setIsLoading(false));
+      ).then(() => {
+        setIsLoading(false);
+        isLoadingRef.current = false;
+      });
     }
   }, [imageData]);
 
@@ -62,24 +75,27 @@ export default function Nature() {
         </div>
 
         <div className="explore-section">
-          {isLoading
-            ? Array(imageData.length) // Show 10 skeletons while loading
-                .fill(0)
-                .map((_, index) => <Skeleton key={index} />)
-            : imageData.map((image, index) => (
-                <Imagebox
-                  key={index}
-                  source={image.largeImageURL}
-                  donwloadId={image.id}
-                  views={image.views}
-                  likes={image.likes}
-                  downloads={image.downloads}
-                  previewURL={image.previewURL}
-                />
-              ))}
-          {imageData.length == 0 ? (
+          {!errormsg
+            ? isLoading
+              ? Array(imageData.length) // Show 10 skeletons while loading
+                  .fill(0)
+                  .map((_, index) => <Skeleton key={index} />)
+              : imageData.map((image, index) => (
+                  <Imagebox
+                    key={index}
+                    source={image.largeImageURL}
+                    donwloadId={image.id}
+                    views={image.views}
+                    likes={image.likes}
+                    downloads={image.downloads}
+                    previewURL={image.previewURL}
+                    tags={image.tags}
+                  />
+                ))
+            : null}
+          {errormsg ? (
             <div style={{ textAlign: "center" }}>
-              <h2>Could not Load Images</h2> <p>check your internet connection !</p>{" "}
+              <h2>Could not Load Images</h2> <p>check your internet connection !</p>
             </div>
           ) : null}
         </div>

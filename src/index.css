@@ -245,8 +245,9 @@ background-color: rgb(4, 75, 4);
 
 .download-details{
   max-width: 50%;
-  min-width: 50%;
+  width: 50%;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
@@ -255,6 +256,8 @@ margin-bottom: 2rem;
 
 .img-stats{
   display: flex;
+  flex-wrap: wrap;
+
   justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
